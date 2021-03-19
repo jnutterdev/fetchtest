@@ -15,7 +15,10 @@ app.use(sassMiddleware({
   express.static(path.join(__dirname, 'public')))
 
 // Templating engine
-app.engine('hbs', exphbs({ extname: 'hbs' }));
+app.engine('hbs', exphbs({ 
+    extname: 'hbs',
+    defaultLayout: 'main', 
+}));
 app.set('view engine', 'hbs');
 
 app.use('/', routes);

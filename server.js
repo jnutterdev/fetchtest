@@ -4,8 +4,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const routes = require("./app/routes");
 const sassMiddleware = require('node-sass-middleware');
+require('dotenv').config();
 
+// Parsing middleware
+app.use(express.urlencoded({ extended: false}));
+app.use(express.json());
+
+// Static files
 const path = require('path');
+const bodyParser = require('body-parser');
 app.use(sassMiddleware({
     src: __dirname + '/sass', 
     dest: __dirname + '/public/stylesheets', 

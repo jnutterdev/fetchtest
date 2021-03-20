@@ -1,3 +1,7 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&display=swap');
+$primaryfont: 'Josefin Slab',
+serif;
 // Variables
 $dark1: #F2E205;
 $dark2: #F2CB05;
@@ -9,19 +13,22 @@ $light2: #f7f5f5;
 body {
     background-color: $dark4;
     color: $light1;
-    margin: 40px;
+    font-family: $primaryfont;
     .wrapper {
-        max-width: 940px;
-        margin: 0 20px;
-        display: grid;
-        grid-gap: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 }
 
 header,
 footer {
-    margin-left: 5px;
-    margin-right: 5px;
-    flex: 0 1 100%;
-    grid-column: 1 / -1;
+    width: 100vw;
+    height: 200px;
+    background-color: $light1;
+    flex-shrink: 0;
+}
+
+main {
+    flex-grow: 1;
 }

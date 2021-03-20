@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const routes = require("./app/routes");
+
 const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
@@ -44,5 +44,6 @@ pool.getConnection((err, conn) =>  {
     console.log(`Connected as ID ${conn.threadId}`);
 });
 
+const routes = require("./server/routes/user");
 app.use('/', routes);
 app.listen(PORT, ()=> console.log(`Listening on http://localhost:${PORT}`));

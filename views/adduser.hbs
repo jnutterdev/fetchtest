@@ -1,27 +1,12 @@
-<div class="nav" aria-label="breadcrumb">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li aria-current="page">New user</li>
-    </ul>
-</div>
+{{> breadcrumb}}
+
 
 {{#if alert}}
 <div class="alert">
-    <strong></strong>
+    <strong>{{alert}}</strong>
     <button>Dismiss</button>
 </div>
-{{#/if}}
+{{/if}}
 <form action="/adduser" method="POST" novalidate>
-
-    <input type="text" name="firstname" id="floatingInput" placeholder="First name">
-    <label for="floatingInput">First name</label>
-    <input type="text" name="lastname" id="floatingInput" placeholder="Last name">
-    <label for="floatingInput">Last name</label>
-    <input type="email" name="email" id="floatingInput" placeholder="Email address">
-    <label for="floatingInput">Email address</label>
-    <input type="text" name="phone" id="floatingInput" placeholder="Phone">
-    <label for="floatingInput">Phone</label>
-    <input type="text" name="comments" id="floatingInput" placeholder="Comments">
-    <label for="floatingInput">Comments</label>
-    <button type="submit">Add user</button>
+{{> userform}}
 </form>

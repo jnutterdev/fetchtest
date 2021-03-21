@@ -25,6 +25,22 @@ exports.view = (req, res) => {
     });
 };
 
+exports.viewUser = (req, res) => {
+    pool.getConnection((err, conn) =>  {
+        if(err) throw err; // not connected
+        console.log(`Connected as ID ${conn.threadId}`);
+    conn.query(`SELECT * FROM users WHERE id = ${req.params.id}`, (err, rows) => {
+    conn.release();
+    if (!err){
+        res.render('viewuser', { rows });
+     } else {
+         console.log(err);
+     }
+        console.log('The data from the user table: \n', rows);
+        });
+    });
+};
+
 exports.find = (req, res) => {
     pool.getConnection((err, conn) =>  {
     if(err) throw err; // not connected
@@ -43,7 +59,7 @@ exports.find = (req, res) => {
 }
 
 exports.form = (req, res) => {
-    res.render('adduser');
+    res.render('adduser', {title: "Add user"});
 }
 
 exports.create = (req, res) => {
@@ -54,11 +70,57 @@ exports.create = (req, res) => {
         conn.query('INSERT INTO users SET firstname = ?, lastname = ?, email = ?, phone = ?, comments = ?',[firstname, lastname, email, phone, comments], (err, rows) => {
         conn.release();
         if (!err){
-            res.render('adduser', { alert: "User added successfully." });
+            res.render('adduser', { alert: "User added successfully.", title: "Add user" });
         } else {
             console.log(err);
         }
             console.log('The data from the user table: \n', rows);
             });
         });
+}
+
+exports.edit = (req, res) => {
+    pool.getConnection((err, conn) =>  {
+        if(err) throw err; // not connected
+        console.log(`Connected as ID ${conn.threadId}`);
+    conn.query("SELECT * FROM users WHERE id = ?",[req.params.id], (err, rows) => {
+    conn.release();
+    if (!err){
+        res.render('edituser', {title: 'Edit user', rows});
+     } else {
+         console.log(err);
+     }
+        console.log('The data from the user table: \n', rows);
+        });
+    });
+}
+
+exports.updateUser = (req, res) => {
+    const { firstname, lastname, email, phone, comments } = req.body;
+
+    pool.getConnection((err, conn) =>  {
+        if(err) throw err; // not connected
+        console.log(`Connected as ID ${conn.threadId}`);
+    conn.query("UPDATE users SET firstname = ?, lastname = ? WHERE id = ?",[firstname, lastname, req.params.id], (err, rows) => {
+    conn.release();
+    if (!err){
+        pool.getConnection((err, conn) =>  {
+            if(err) throw err; // not connected
+            console.log(`Connected as ID ${conn.threadId}`);
+        conn.query("SELECT * FROM users WHERE id = ?",[req.params.id], (err, rows) => {
+        conn.release();
+        if (!err){
+            res.render('edituser', {title: 'Edit user', rows});
+         } else {
+             console.log(err);
+         }
+            console.log('The data from the user table:', rows);
+            });
+        });
+     } else {
+         console.log(err);
+     }
+        console.log('The data from the user table: \n', rows);
+        });
+    });
 }

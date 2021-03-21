@@ -1,0 +1,7 @@
+{{> breadcrumb}}
+
+{{#each rows}}
+<form action="/edituser/{{this.id}}" method="POST" novalidate>
+    {{> userform}}
+</form>
+{{/each}}

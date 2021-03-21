@@ -21,9 +21,9 @@
             <td>{{this.email}}</td>
             <td>{{this.phone}}</td>
             <td>
-                <a href="#" type="button">View</a>
-                <a href="#" type="button">Edit</a>
-                <a href="#" type="button">Delete</a>
+                <a href="/viewuser/{{this.id}}" type="button">View</a>
+                <a href="/edituser/{{this.id}}" type="button">Edit</a>
+                <a href="/deleteuser/{{this.id}}" type="button">Delete</a>
             </td>
          </tr>
          {{/each }}

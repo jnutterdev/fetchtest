@@ -21,6 +21,10 @@ body {
     }
 }
 
+body {
+    color: black;
+}
+
 header,
 footer {
     flex-shrink: 0;
@@ -30,41 +34,44 @@ main {
     flex-grow: 1;
 }
 
-nav {
+nav,
+.nav {
     background-color: $dark3;
-    height: 5em;
     top: 0;
-    li {
+    ul li {
         list-style-type: none;
         display: inline;
-        padding: 9px;
+        padding: 0 2px;
+        color: black;
     }
 }
 
 // id selectors 
-#customers {
+.customers {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#customers td,
-#customers th {
+.customers td,
+.customers th,
+.customers label,
+.customers input {
     border: 1px solid #ddd;
     background-color: $light2;
     padding: 8px;
     color: black;
 }
 
-#customers tr:nth-child(even) {
+.customers tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-#customers tr:hover {
+.customers tr:hover {
     background-color: #ddd;
 }
 
-#customers th {
+.customers th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

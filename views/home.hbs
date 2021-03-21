@@ -1,9 +1,9 @@
 <section>
     <div class="col">
         <h1>Users</h1>
-        <a href="/adduser" type="button">Add user</a>
+        <button><a href="/adduser" type="button">Add user</a></button>
     </div>
-    <table id="customers">
+    <table class="customers">
         <tr>
             <th>id</th>
             <th>First name</th>
@@ -21,9 +21,9 @@
             <td>{{this.email}}</td>
             <td>{{this.phone}}</td>
             <td>
-                <a href="#" type="button">View</a>
-                <a href="#" type="button">Edit</a>
-                <a href="#" type="button">Delete</a>
+                <a href="/viewuser/{{this.id}}" type="button">View</a>
+                <a href="/edituser/{{this.id}}" type="button">Edit</a>
+                <a href="/{{this.id}}" type="button">Delete</a>
             </td>
          </tr>
          {{/each }}

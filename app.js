@@ -13,11 +13,11 @@ app.use(express.json());
 
 // Static files
 const path = require('path');
-const bodyParser = require('body-parser');
 app.use(sassMiddleware({
     src: __dirname + '/sass', 
     dest: __dirname + '/public/stylesheets', 
     debug: true, 
+    force: true,
     outputStyle: 'compressed' 
   }),
   express.static(path.join(__dirname, 'public')))

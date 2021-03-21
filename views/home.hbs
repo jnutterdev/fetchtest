@@ -1,7 +1,7 @@
 <section>
     <div class="col">
         <h1>Users</h1>
-        <a href="/adduser" type="button">Add user</a>
+        <button><a href="/adduser" type="button">Add user</a></button>
     </div>
     <table id="customers">
         <tr>
@@ -23,7 +23,7 @@
             <td>
                 <a href="/viewuser/{{this.id}}" type="button">View</a>
                 <a href="/edituser/{{this.id}}" type="button">Edit</a>
-                <a href="/deleteuser/{{this.id}}" type="button">Delete</a>
+                <a href="/{{this.id}}" type="button">Delete</a>
             </td>
          </tr>
          {{/each }}

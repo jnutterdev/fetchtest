@@ -13,7 +13,7 @@ exports.view = (req, res) => {
     pool.getConnection((err, conn) =>  {
         if(err) throw err; // not connected
         console.log(`Connected as ID ${conn.threadId}`);
-    conn.query('SELECT * FROM users', (err, rows) => {
+    conn.query('SELECT * FROM users WHERE status = "active"', (err, rows) => {
     conn.release();
     if (!err){
         res.render('home', { rows });
@@ -101,7 +101,7 @@ exports.updateUser = (req, res) => {
     pool.getConnection((err, conn) =>  {
         if(err) throw err; // not connected
         console.log(`Connected as ID ${conn.threadId}`);
-    conn.query("UPDATE users SET firstname = ?, lastname = ? WHERE id = ?",[firstname, lastname, req.params.id], (err, rows) => {
+    conn.query("UPDATE users SET firstname = ?, lastname = ?, email = ?, phone = ?, comments =? WHERE id = ?",[firstname, lastname, email, phone, comments, req.params.id], (err, rows) => {
     conn.release();
     if (!err){
         pool.getConnection((err, conn) =>  {
@@ -110,7 +110,7 @@ exports.updateUser = (req, res) => {
         conn.query("SELECT * FROM users WHERE id = ?",[req.params.id], (err, rows) => {
         conn.release();
         if (!err){
-            res.render('edituser', {title: 'Edit user', rows});
+            res.render('edituser', {title: 'Edit user', rows, alert: `${firstname} has been updated!`});
          } else {
              console.log(err);
          }
@@ -121,6 +121,22 @@ exports.updateUser = (req, res) => {
          console.log(err);
      }
         console.log('The data from the user table: \n', rows);
+        });
+    });
+}
+
+exports.deleteUser = (req, res) => {
+    pool.getConnection((err, conn) =>  {
+        if(err) throw err; // not connected
+        console.log(`Connected as ID ${conn.threadId}`);
+    conn.query("UPDATE users SET status = ? WHERE id = ?",['inactive', req.params.id], (err, rows) => {
+    conn.release();
+    if (!err){
+        res.redirect('/');
+     } else {
+         console.log(err);
+     }
+        console.log('The data from the users table: \n', rows);
         });
     });
 }

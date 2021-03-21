@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const routes = require("./app/routes");
+
 const sassMiddleware = require('node-sass-middleware');
 require('dotenv').config();
 
@@ -13,11 +13,11 @@ app.use(express.json());
 
 // Static files
 const path = require('path');
-const bodyParser = require('body-parser');
 app.use(sassMiddleware({
     src: __dirname + '/sass', 
     dest: __dirname + '/public/stylesheets', 
     debug: true, 
+    force: true,
     outputStyle: 'compressed' 
   }),
   express.static(path.join(__dirname, 'public')))
@@ -29,20 +29,7 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 
-// Connection pool
-const pool = mysql.createPool({
-    connectionLimit: 100,
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME
-});
 
-// Connect to DB
-pool.getConnection((err, conn) =>  {
-    if(err) throw err; // not connected
-    console.log(`Connected as ID ${conn.threadId}`);
-});
-
+const routes = require("./server/routes/user");
 app.use('/', routes);
 app.listen(PORT, ()=> console.log(`Listening on http://localhost:${PORT}`));

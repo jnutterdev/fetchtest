@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="wrapper">
@@ -19,35 +19,12 @@
         </nav>
     </header>
     <main>
+        <form action="/" method="POST" novalidate> 
+            <input type="search" placeholder="Search" aria-label="Search" name="search" />
+            <button type="submit">Search</button>
+        </form>
         {{{body}}}
     </main>
-    <section>
-    <table id="customers">
-        <tr>
-            <th>id</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Comments</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Vincent</td>
-            <td>Nutter</td>
-            <td>vbeetle@gmail.com</td>
-            <td>0000000000</td>
-            <td>I like bugs</td>
-            <td>active</td>
-        </tr>
-        <td>
-            <a href="#" type="button">View</a>
-            <a href="#" type="button">Edit</a>
-            <a href="#" type="button">Delete</a>
-        </td>
-        </table>
-    </section>
     <footer>
         &copy; 2021 jnutterdev
     </footer>

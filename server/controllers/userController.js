@@ -132,7 +132,8 @@ exports.deleteUser = (req, res) => {
     conn.query("UPDATE users SET status = ? WHERE id = ?",['inactive', req.params.id], (err, rows) => {
     conn.release();
     if (!err){
-        res.redirect('/');
+        let removedUser = encodeURIComponent('User successfully removed.');
+        res.redirect('/?removedUser' + removedUser);
      } else {
          console.log(err);
      }

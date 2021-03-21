@@ -1,2 +1,27 @@
-<h1>Hello!</h1>
-<p>{{ data }}</p>
+<section>
+    <table id="customers">
+        <tr>
+            <th>id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Comments</th>
+            <th>Status</th>
+        </tr>
+        {{#each rows}}
+        <tr>
+            <td>{{this.id}}</td>
+            <td>{{this.firstname}}</td>
+            <td>{{this.lastname}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>
+                <a href="#" type="button">View</a>
+                <a href="#" type="button">Edit</a>
+                <a href="#" type="button">Delete</a>
+            </td>
+         </tr>
+         {{/each }}
+        </table>
+    </section>

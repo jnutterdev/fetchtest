@@ -9,12 +9,22 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-// Connect to DB
-pool.getConnection((err, conn) =>  {
-    if(err) throw err; // not connected
-    console.log(`Connected as ID ${conn.threadId}`);
-});
-
 exports.view = (req, res) => {
-    res.render('index');
+
+    pool.getConnection((err, conn) =>  {
+        if(err) throw err; // not connected
+        console.log(`Connected as ID ${conn.threadId}`);
+   
+    conn.query('SELECT * FROM users', (err, rows) => {
+    conn.release();
+
+    if (!err){
+        res.render('index', { rows });
+     } else {
+         console.log(err);
+     }
+        console.log('The data from the user table: \n', rows);
+        });
+    });
 };
+

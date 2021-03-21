@@ -11,4 +11,4 @@ status VARCHAR(45) DEFAULT('active')
 ); 
 
 INSERT INTO users (firstname, lastname, email, phone, comments, status)
-VALUES ('John', 'Nutter', 'email@email.com', '4041234567', 'This is cool, dude.', 'active'); 
+VALUES ('Erika', 'Martinez Nutter', 'straightlacedx@email.com', '4041234567', 'I teach, therefor I am', 'active'); 

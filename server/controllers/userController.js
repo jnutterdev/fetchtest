@@ -29,10 +29,10 @@ exports.viewUser = (req, res) => {
     pool.getConnection((err, conn) =>  {
         if(err) throw err; // not connected
         console.log(`Connected as ID ${conn.threadId}`);
-    conn.query(`SELECT * FROM users WHERE id = ${req.params.id}`, (err, rows) => {
+    conn.query("SELECT * FROM users WHERE id = ?",[req.params.id], (err, rows) => {
     conn.release();
     if (!err){
-        res.render('viewuser', { rows });
+        res.render('viewuser', { rows, title: "User profile" });
      } else {
          console.log(err);
      }
@@ -46,7 +46,7 @@ exports.find = (req, res) => {
     if(err) throw err; // not connected
     console.log(`Connected as ID ${conn.threadId}`);
     let searchTerm = req.body.search;
-    conn.query('SELECT * FROM users WHERE firstname LIKE ? OR lastname LIKE ?',['%' + searchTerm + '%','%' + searchTerm + '%'], (err, rows) => {
+    conn.query('SELECT * FROM users WHERE status = "active" AND firstname LIKE ? OR lastname LIKE ?',['%' + searchTerm + '%','%' + searchTerm + '%'], (err, rows) => {
     conn.release();
     if (!err){
         res.render('home', { rows });
@@ -86,7 +86,7 @@ exports.edit = (req, res) => {
     conn.query("SELECT * FROM users WHERE id = ?",[req.params.id], (err, rows) => {
     conn.release();
     if (!err){
-        res.render('edituser', {title: 'Edit user', rows});
+        res.render('edituser', {title: 'Update user', rows});
      } else {
          console.log(err);
      }

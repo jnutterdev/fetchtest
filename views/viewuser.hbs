@@ -1,0 +1,23 @@
+{{> breadcrumb}}
+{{#each rows}}
+<table class="table customers">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Comments</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{this.firstname}}</td>
+            <td>{{this.lastname}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.comments}}</td>
+        </tr>
+    </tbody>
+</table>
+{{/each}}

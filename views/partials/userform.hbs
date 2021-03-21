@@ -16,4 +16,4 @@
     <label for="floatingInput">Comments</label>
     <input type="text" name="comments" id="floatingInput" placeholder="Comments" value="{{this.comments}}">
     
-    <button type="submit">Add user</button>
+    <button type="submit">{{#if title}}{{title}}{{else}}Update{{/if}}</button>

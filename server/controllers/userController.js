@@ -10,14 +10,12 @@ const pool = mysql.createPool({
 });
 
 exports.view = (req, res) => {
-
     pool.getConnection((err, conn) =>  {
         if(err) throw err; // not connected
         console.log(`Connected as ID ${conn.threadId}`);
    
     conn.query('SELECT * FROM users', (err, rows) => {
     conn.release();
-
     if (!err){
         res.render('index', { rows });
      } else {
@@ -28,3 +26,20 @@ exports.view = (req, res) => {
     });
 };
 
+exports.find = (req, res) => {
+    pool.getConnection((err, conn) =>  {
+    if(err) throw err; // not connected
+    console.log(`Connected as ID ${conn.threadId}`);
+    let searchTerm = req.body.search;
+
+    conn.query('SELECT * FROM users WHERE firstname LIKE ? OR lastname LIKE ?',['%' + searchTerm + '%','%' + searchTerm + '%'], (err, rows) => {
+    conn.release();
+    if (!err){
+        res.render('index', { rows });
+    } else {
+        console.log(err);
+    }
+        console.log('The data from the user table: \n', rows);
+        });
+    });
+}

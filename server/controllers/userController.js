@@ -54,7 +54,7 @@ exports.create = (req, res) => {
         conn.query('INSERT INTO users SET firstname = ?, lastname = ?, email = ?, phone = ?, comments = ?',[firstname, lastname, email, phone, comments], (err, rows) => {
         conn.release();
         if (!err){
-            res.render('adduser', { rows });
+            res.render('adduser', { alert: "User added successfully." });
         } else {
             console.log(err);
         }

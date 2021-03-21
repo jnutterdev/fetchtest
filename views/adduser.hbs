@@ -5,6 +5,12 @@
     </ul>
 </div>
 
+{{#if alert}}
+<div class="alert">
+    <strong></strong>
+    <button>Dismiss</button>
+</div>
+{{#/if}}
 <form action="/adduser" method="POST" novalidate>
 
     <input type="text" name="firstname" id="floatingInput" placeholder="First name">

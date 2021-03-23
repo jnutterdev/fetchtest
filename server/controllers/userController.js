@@ -2,19 +2,23 @@ const pool = require('../models/db');
 
 exports.view = (req, res) => {
     
-    pool.getConnection((err, conn) =>  {
-        if(err) throw err;
-        console.log(`Connected as ID ${conn.threadId}`);
-        conn.query('SELECT * FROM users WHERE status = "active"', (err, rows) => {
-        conn.release();
-        if (!err){
-            res.render('home', { rows });
-        } else {
-            console.log(err);
+    pool.getConnection((err, conn, next) =>  {
+        try {
+            const result = 
+            await conn.query('SELECT * FROM users WHERE status = "active"', (err, rows) => {
+                conn.release();
+                if (!err){
+                res.render('home', { rows });
+                } else {
+                console.log(err);
+                }
+                console.log('The data from the user table: \n', rows);
+              })   
+        } catch (error) {
+            return next(error)
         }
-            console.log('The data from the user table: \n', rows);
-            });
-        });
+       
+    });
 };
 
 exports.viewUser = (req, res) => {

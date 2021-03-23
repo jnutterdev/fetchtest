@@ -8,7 +8,7 @@ router.get('/createdb', dbController.dbCreate);
 router.get('/createtable', dbController.dbCreateTable);
 
 // creates and manages user posts
-router.get('/', userController.view);
+router.get('/', async userController.view);
 router.post('/', userController.find);
 router.get('/adduser', userController.form);
 router.post('/adduser', userController.create);
